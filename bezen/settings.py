@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-d2h5mh1ga_#d!@%91ghyf70lt6#tjre0rixo1)&s8eyeai0(bx
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com', 'localhost']
-CSRF_TRUSTED_ORIGINS = ['https://bezen.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['https://bezen-recipe.azurewebsites.net']
 
 
 
