@@ -10,7 +10,6 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 import requests
 
-# Create your views here.
 
 
 def register(request):
