@@ -88,7 +88,7 @@
       <input type="hidden" value="{{recipe.id}}" name="recipe_id" style="display: none">
       <button type="submit"><a href="/add_recipe" class="edit"><i class="icon-edit"></i></a></button>
     </form>
-    <img src="{{recipe.image}}" class="card-img-top" alt="{{recipe.recipe_name}}">
+    <img src="{{recipe.images.url}}" class="card-img-top" alt="{{recipe.recipe_name}}">
     <div class="card-body" style="background-color: #abb8c320">
       <p class="category">
         {{recipe.category}}
