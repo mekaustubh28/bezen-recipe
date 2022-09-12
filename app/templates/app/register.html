@@ -1,0 +1,20 @@
+{% extends 'app/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!--Register-->
+<div class="container py-5">
+    <h1>Register</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{ register_form|crispy }}
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <p class="text-center">If you already have an account, <a href="/login">login</a> instead.</p>
+    <!-- JavaScript Bundle with Popper -->
+</div>
+
+{% endblock %}

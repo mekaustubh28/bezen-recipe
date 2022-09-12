@@ -1,0 +1,115 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<style>
+  p.category {
+    background: rgb(98, 163, 0);
+    width: max-content;
+    padding: 2px 6px;
+    color: white;
+    border-radius: 5px;
+  }
+
+  a.view_more {
+    float: right;
+    color: rgb(98, 163, 0);
+  }
+
+  div.card {
+    margin: 20px !important;
+    flex: none;
+    /* overflow: hidden; */
+    border-radius: 0px !important;
+    position: relative;
+  }
+
+  div.card img {
+    border-radius: 0px !important;
+    transition: 0.3s ease-in-out;
+  }
+
+  div.card:hover img {
+    /* transform: scale(1.1); */
+    /* overflow: hidden;
+    z-index: -1; */
+    opacity: 0.7;
+    transition: 0.3s ease-in-out;
+  }
+
+  div.container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: auto;
+  }
+
+  a.edit {
+    color: rgb(98, 163, 0);
+    text-decoration: none;
+    position: absolute;
+    right: -10px;
+    z-index: 10;
+    padding: 10px;
+    background: #fff;
+    border-radius: 20%;
+    font-size: 30px;
+    top: -10px
+  }
+  button.trash{
+    border: 0px;
+    background-color: transparent;
+  }
+
+  a.trash{
+    font-size: 20px;
+    text-decoration: none;
+    color: black;
+  }
+</style>
+<!--Login-->
+<div class="container my-3" style="display: flex">
+  {% if user.is_authenticated %}
+  {% if not my_recipe|length %}
+  <br>
+  <!-- <div class="container my-5"> -->
+
+  <h1 style="text-align: center; margin: auto;">Add Recipe to see here.</h1>
+  <!-- </div> -->
+  {% else %}
+  {% for recipe in my_recipe %}
+  <div class="card mb-3" style="width: 18rem;z-index: 9;">
+    <form action="/add_recipe" method="post" style="height: 0">
+      {% csrf_token %}
+      <input type="hidden" value="{{recipe.id}}" name="recipe_id" style="display: none">
+      <button type="submit"><a href="/add_recipe" class="edit"><i class="icon-edit"></i></a></button>
+    </form>
+    <img src="{{recipe.image}}" class="card-img-top" alt="{{recipe.recipe_name}}">
+    <div class="card-body" style="background-color: #abb8c320">
+      <p class="category">
+        {{recipe.category}}
+      </p>
+      <h4 class="card-title" style="text-transform: uppercase;">{{recipe.recipe_name}}</h4>
+      <!-- <br> -->
+      <hr>
+      <div>
+        <form action="/my_recipe" method="post" style="height: 0">
+          {% csrf_token %}
+          <button type="submit" class="trash" value="{{recipe.id}}" name="delete"><a href="/add_recipe" class="trash"><i class="icon-trash"></i></a></button>
+        </form>
+        <a href="/recipes/{{recipe.category}}/{{recipe.id}}" class="view_more">View Recipe</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+  {% else %}
+  <h1 style="text-align: center; margin: auto;">Please Login to view your Recipes</h1>
+  {% endif %}
+</div>
+
+{% endblock %}

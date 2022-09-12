@@ -1,0 +1,46 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<!--Login-->
+<div class="container my-3">
+    {% if user.is_authenticated%}
+    <form method="post" enctype="multipart/form-data">
+        {% load widget_tweaks %}
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
+            {% render_field form.recipe_name class="form-control" placeholder=form.recipe_name.label %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Description</label>
+            {% render_field form.recipe_description class="form-control" placeholder=form.recipe_description.label %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Ingredients</label>
+            {% render_field form.ingredients class="form-control" placeholder=form.ingredients.label %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            {% render_field form.category class="form-control" placeholder=form.category.label %}
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Image</label>
+            {% render_field form.images class="form-control" placeholder=form.images.label %}
+        </div>
+        {% if edit %}
+        <input type="submit" class="btn btn-success my-3" name="edit" value="Edit"></input>
+        <input type="hidden" value="{{edit}}" name="id">
+        {% else %}
+        <input type="submit" class="btn btn-success my-3" name="submit" value="Submit"></input>
+        {% endif %}
+    </form>
+    {%else%}
+    <h1 style="text-align: center; margin: auto;">Please Login to add a Recipe</h1>
+    {% endif %}
+</div>
+
+{% endblock %}

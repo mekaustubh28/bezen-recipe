@@ -1,0 +1,117 @@
+{% extends "app/base.html" %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+<style>
+    h1.heading {
+        font-size: 3vw !important;
+        text-align: center;
+    }
+
+    div.top {
+        display: flex;
+        border: 1px solid rgba(128, 128, 128, 0.477);
+        padding: 0;
+        background-color: #abb8c320;
+    }
+
+    div.image,
+    div.desc {
+        flex: none;
+        width: 50%;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    div.image img {
+        transform: scale(1.5);
+        width: 100%;
+        height: 100%;
+
+    }
+
+    ul.ingredients {
+        width: 30%;
+        margin: auto;
+    }
+
+    p.owner {
+        float: right;
+        background: rgb(98, 163, 0);
+        width: max-content;
+        padding: 2px 6px;
+        color: white;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+
+    h3.owner {
+        border-bottom: 3px solid rgb(98, 163, 0);
+        padding-bottom: 10px;
+        width: 30%;
+        margin: auto;
+    }
+
+    h4.process{
+        padding: 50px;
+        border-top: 20px solid rgba(98, 163, 0, 0.499);
+        border-bottom: 20px solid rgb(98, 163, 0, 0.499);
+    }
+
+    @media only screen and (max-width: 950px) {
+        div.top {
+            display: block;
+        }
+
+        div.image,
+        div.desc {
+            flex: none;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1.heading{
+        font-size: 6vw!important;
+        }
+    }
+</style>
+<!--Login-->
+<div class="container py-5">
+    <div class="container top">
+        <div class="image">
+            <img src="{{recipe.image}}" alt="{{recipe.recipe_name}}">
+        </div>
+        <div class="desc my-5">
+            <h1 class="heading">{{recipe.recipe_name}}</h1>
+            <h3 class="owner">{{recipe.category}}</h3>
+            <hr>
+            <br>
+            <h2>Ingredients</h2>
+            <br>
+            <ul class="list-group ingredients" id="ingredients">
+            </ul>
+            <br>
+            <p class="owner mx-5">by:{{recipe.owner}}</p>
+        </div>
+    </div>
+    <br><br>
+    <div class="recipe">
+        <h1 class="heading">The Process</h1>
+        <h4 class="process" style="text-align: justify;">{{recipe.recipe_description}}</h4>
+    </div>
+    <h2 class="my-5" style="float: right;">Thank you for reading {{recipe.owner}}'s Recipe</h2>
+</div>
+
+<script>
+    ingredients = "{{recipe.ingredients}}";
+    list = ingredients.split(',');
+    console.log(list);
+    ul = document.getElementById('ingredients');
+    for (var x = 0; x < list.length; x++) {
+        ul.innerHTML += "<li class='list-group-item'>" + list[x] + "</li>"
+    }
+</script>
+
+{% endblock %}
