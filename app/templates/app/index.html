@@ -58,7 +58,7 @@
         <div class="uthalebaba" id="{{recipe.id}}">
             <div class="card mb-3" style="width: 18rem;z-index: 9;">
                 {% load static %}
-                <img src="{{recipe.image}}" class="card-img-top" alt="{{recipe.recipe_name}}">
+                <img src="{{recipe.images.url}}" class="card-img-top" alt="{{recipe.recipe_name}}">
                 <div class="card-body" style="background-color: #abb8c320">
                     <p class="category">
                         {{recipe.category}}
